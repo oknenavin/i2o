@@ -30,6 +30,4 @@ jobs:
       env:
         CXX: g++-10
         CXXFLAGS: -std=c++17
-      run: |
-        sudo make -j install
-        ls -la /usr/local/bin
+      run: sudo make -j install
