@@ -31,5 +31,7 @@ jobs:
         CXX: g++-10
         CXXFLAGS: -std=c++17
       run: |
-        make -j
-        sudo make install
+        make -j && sudo make install
+        stat /usr/local/bin/json2cbor
+        stat /usr/local/bin/json2json
+        stat /usr/local/bin/cbor2json
