@@ -9,13 +9,16 @@ jobs:
   gcc-10:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout CXON
+      uses: actions/checkout@v1
       with:
         repository: oknenavin/cxon
         ref: develop
         path: cxon
+    - name: Install CXON
       run: sudo make -C ../cxon install
-    - uses: actions/checkout@v1
+    - name: Checkout I2O
+      uses: actions/checkout@v1
       with:
         ref: develop
         path: i2o
@@ -23,26 +26,31 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install gcc-10 g++-10
-    - name: Build
+    - name: Build I2O
       env:
         CXX: g++-10
         CXXFLAGS: -std=c++17
       run: |
         make -j && sudo make install
-        cd /usr/local/bin && stat -t json2cbor json2json cbor2json
+        stat /usr/local/bin/json2cbor
+        stat /usr/local/bin/json2json
+        stat /usr/local/bin/cbor2json
   
   # clang ######################################################################
 
   clang-11:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v1
+    - name: Checkout CXON
+      uses: actions/checkout@v1
       with:
         repository: oknenavin/cxon
         ref: develop
         path: cxon
+    - name: Install CXON
       run: sudo make -C ../cxon install
-    - uses: actions/checkout@v1
+    - name: Checkout I2O
+      uses: actions/checkout@v1
       with:
         ref: develop
         path: i2o
@@ -56,4 +64,6 @@ jobs:
         CXXFLAGS: -std=c++20
       run: |
         make -j && sudo make install
-        cd /usr/local/bin && stat -t json2cbor json2json cbor2json
+        stat /usr/local/bin/json2cbor
+        stat /usr/local/bin/json2json
+        stat /usr/local/bin/cbor2json
