@@ -17,9 +17,8 @@ jobs:
         path: cxon
     - name: Install CXON
       run: |
-        pwd
-        ls
         sudo make -C ../cxon install
+        ls /usr/local/include
     - name: Checkout I2O
       uses: actions/checkout@v1
       with:
@@ -34,6 +33,7 @@ jobs:
         CXX: g++-10
         CXXFLAGS: -std=c++17
       run: |
-        pwd
-        ls
+        echo $CXXFLAGS
+        sudo echo $CXXFLAGS
         sudo make -C ../i2o install
+        ls /usr/local/bin
