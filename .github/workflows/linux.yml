@@ -35,3 +35,35 @@ jobs:
         stat /usr/local/bin/json2cbor
         stat /usr/local/bin/json2json
         stat /usr/local/bin/cbor2json
+  
+  # clang ######################################################################
+
+  clang-11:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Checkout CXON
+      uses: actions/checkout@v1
+      with:
+        repository: oknenavin/cxon
+        ref: develop
+        path: cxon
+    - name: Install CXON
+      run: sudo make -C ../cxon install
+    - name: Checkout I2O
+      uses: actions/checkout@v1
+      with:
+        ref: develop
+        path: i2o
+    - name: Compiler setup
+      run: |
+        sudo apt-get update
+        sudo apt-get install clang-11
+    - name: Build I2O
+      env:
+        CXX: clang++-11
+        CXXFLAGS: -std=c++20
+      run: |
+        make -j && sudo make install
+        stat /usr/local/bin/json2cbor
+        stat /usr/local/bin/json2json
+        stat /usr/local/bin/cbor2json
