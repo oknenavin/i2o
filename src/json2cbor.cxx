@@ -7,7 +7,7 @@
 
 #include "cxon/json.hxx" // JSON is the default format
 #include "cxon/cbor.hxx"
-#include "cxon/lib/node.hxx"
+#include "cxon/lib/node.ordered.hxx"
 
 int main(int /*argc*/, char* /*argv*/[]) {
     using CBOR = cxon::CBOR<>;
@@ -16,7 +16,7 @@ int main(int /*argc*/, char* /*argv*/[]) {
         return std::cerr << "i/o mode cannot be set", -1;
     }
 
-    cxon::cbor::node node;
+    cxon::cbor::ordered_node node;
 
         auto const fb = cxon::from_bytes(node, std::istreambuf_iterator<char>(std::cin), std::istreambuf_iterator<char>());
         if (!fb) {

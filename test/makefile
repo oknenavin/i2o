@@ -1,10 +1,7 @@
 SHELL = /bin/sh
 
 outdir = .out
-srcdir = src
-
-prefix ?= /usr/local
-insdir = $(DESTDIR)$(prefix)/bin
+srcdir = ../src
 
 json2cbor-src = \
     $(srcdir)/json2cbor.cxx
@@ -14,6 +11,9 @@ json2json-src = \
 
 cbor2json-src = \
     $(srcdir)/cbor2json.cxx
+
+check: all $(in)
+	@./round-trip.sh
 
 all: $(outdir)/json2cbor $(outdir)/json2json $(outdir)/cbor2json
 
@@ -31,17 +31,5 @@ $(outdir)/cbor2json: $(cbor2json-src)
 
 clean:
 	@rm -fr $(outdir)
-	@rm -fr test/$(outdir)
 
-install: $(outdir)/json2cbor $(outdir)/json2json $(outdir)/cbor2json
-	@install -d                                                                      $(insdir)
-	@install -p -m 4755 $(outdir)/json2cbor $(outdir)/json2json $(outdir)/cbor2json  $(insdir)
-
-uninstall:
-	@rm -f $(insdir)/json2cbor $(insdir)/json2json $(insdir)/cbor2json
-
-check: all
-	@mkdir -p test/$(outdir) && cp -f $(outdir)/* test/$(outdir)
-	@$(MAKE) -C test check
-
-.PHONY: all clean install uninstall check
+.PHONY: all clean check
