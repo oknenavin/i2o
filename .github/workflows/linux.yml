@@ -6,6 +6,38 @@ jobs:
 
   # gcc ########################################################################
 
+  gcc-5:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout CXON
+      uses: actions/checkout@v1
+      with:
+        repository: oknenavin/cxon
+        ref: develop
+        path: cxon
+    - name: Install CXON
+      run: sudo make -C ../cxon install
+    - name: Checkout I2O
+      uses: actions/checkout@v1
+      with:
+        ref: develop
+        path: i2o
+    - name: Compiler setup
+      run: |
+        sudo apt-get update
+        sudo apt-get install gcc-5 g++-5
+    - name: Check
+      env:
+        CXX: g++-5
+        CXXFLAGS: -std=c++11
+      run: |
+        make -j
+        make check
+        sudo make install
+        stat -t /usr/local/bin/json2cbor
+        stat -t /usr/local/bin/json2json
+        stat -t /usr/local/bin/cbor2json
+
   gcc-10:
     runs-on: ubuntu-18.04
     steps:
@@ -34,11 +66,43 @@ jobs:
         make -j
         make check
         sudo make install
-        stat /usr/local/bin/json2cbor
-        stat /usr/local/bin/json2json
-        stat /usr/local/bin/cbor2json
+        stat -t /usr/local/bin/json2cbor
+        stat -t /usr/local/bin/json2json
+        stat -t /usr/local/bin/cbor2json
   
   # clang ######################################################################
+
+  clang-3-5:
+    runs-on: ubuntu-16.04
+    steps:
+    - name: Checkout CXON
+      uses: actions/checkout@v1
+      with:
+        repository: oknenavin/cxon
+        ref: develop
+        path: cxon
+    - name: Install CXON
+      run: sudo make -C ../cxon install
+    - name: Checkout I2O
+      uses: actions/checkout@v1
+      with:
+        ref: develop
+        path: i2o
+    - name: Compiler setup
+      run: |
+        sudo apt-get update
+        sudo apt-get install clang-3.5
+    - name: Check
+      env:
+        CXX: clang++-3.5
+        CXXFLAGS: -std=c++11
+      run: |
+        make -j
+        make check
+        sudo make install
+        stat -t /usr/local/bin/json2cbor
+        stat -t /usr/local/bin/json2json
+        stat -t /usr/local/bin/cbor2json
 
   clang-11:
     runs-on: ubuntu-20.04
@@ -68,6 +132,6 @@ jobs:
         make -j
         make check
         sudo make install
-        stat /usr/local/bin/json2cbor
-        stat /usr/local/bin/json2json
-        stat /usr/local/bin/cbor2json
+        stat -t /usr/local/bin/json2cbor
+        stat -t /usr/local/bin/json2json
+        stat -t /usr/local/bin/cbor2json
