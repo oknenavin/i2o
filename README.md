@@ -1,10 +1,21 @@
 ## `I2O` utilities
 
-[![Utilities][img-bin]](https://github.com/oknenavin/i2o)  
+[![Utilities][img-bin]](https://github.com/oknenavin/i2o)
+[![Version][img-ver]](https://github.com/oknenavin/cxon/releases)  
 [![Language][img-lng]](https://isocpp.org/wiki/faq/cpp11)
 [![Format][img-fmt-json]](http://json.org)
 [![Format][img-fmt-cbor]](https://cbor.io)  
 [![License][img-lic]](LICENSE)
+
+[![Build][img-bld-lnx]](https://github.com/oknenavin/i2o/actions/workflows/linux.yml)
+[![Build][img-bld-mac]](https://github.com/oknenavin/i2o/actions/workflows/macos.yml)
+[![Build][img-bld-win]](https://github.com/oknenavin/i2o/actions/workflows/windows.yml)  
+[![Codecov][img-cov]](https://codecov.io/gh/oknenavin/cxon)
+[![Coverity][img-cvr]](https://scan.coverity.com/projects/oknenavin-cxon)
+[![Codacy][img-cod]](https://www.codacy.com/gh/oknenavin/cxon/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=oknenavin/cxon&amp;utm_campaign=Badge_Grade)
+[![CodeQL][img-cql]](https://github.com/oknenavin/cxon/actions?query=workflow%3ACodeQL)
+[![LGTM][img-lgtm-qual]](https://lgtm.com/projects/g/oknenavin/cxon/context:cpp)
+[![LGTM/Alerts][img-lgtm-alrt]](https://lgtm.com/projects/g/oknenavin/cxon/alerts/)
 
 
 --------------------------------------------------------------------------------
@@ -102,11 +113,20 @@ Distributed under the MIT license. See [`LICENSE`](LICENSE) for more information
 
 <!-- links -->
 [img-bin]: https://img.shields.io/badge/bin-I2O-608060.svg?style=plastic
+[img-ver]: https://img.shields.io/github/release/oknenavin/i2o.svg?style=plastic&color=608060
 [img-lng]: https://img.shields.io/badge/language-C++11/20-608060.svg?style=plastic&logo=C%2B%2B
 [img-fmt-json]: https://img.shields.io/badge/language-JSON-608060.svg?style=plastic&logo=JSON
 [img-fmt-cbor]: https://img.shields.io/badge/language-CBOR-608060.svg?style=plastic
 [img-lic]: https://img.shields.io/badge/license-MIT-608060.svg?style=plastic
-
+[img-bld-lnx]: https://github.com/oknenavin/i2o/actions/workflows/linux.yml/badge.svg
+[img-bld-mac]: https://github.com/oknenavin/i2o/actions/workflows/macos.yml/badge.svg
+[img-bld-win]: https://github.com/oknenavin/i2o/actions/workflows/windows.yml/badge.svg
+[img-cov]: https://codecov.io/gh/oknenavin/cxon/branch/master/graph/badge.svg
+[img-cvr]: https://scan.coverity.com/projects/18083/badge.svg
+[img-cod]: https://app.codacy.com/project/badge/Grade/a4b8981f7ce34dd5963f10723f8188bf
+[img-cql]: https://github.com/oknenavin/cxon/workflows/CodeQL/badge.svg
+[img-lgtm-qual]: https://img.shields.io/lgtm/grade/cpp/g/oknenavin/cxon.svg?logo=lgtm&logoWidth=18
+[img-lgtm-alrt]: https://img.shields.io/lgtm/alerts/g/oknenavin/cxon.svg?logo=lgtm&logoWidth=18
 [cpp-comp-support]: https://en.cppreference.com/mwiki/index.php?title=cpp/compiler_support&oldid=108771
 [RFC7159]: https://www.ietf.org/rfc/rfc7159.txt
 [ECMA-404]: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
