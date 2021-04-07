@@ -23,7 +23,7 @@ jobs:
         path: i2o
     - name: Configure
       env:
-        CXXFLAGS: -I ${{github.workspace}}/cxon/src
+        CXXFLAGS: -I ../../../cxon/src
       run: cd test ; cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
     - name: Build
       run: cd test ; cmake --build build --parallel
