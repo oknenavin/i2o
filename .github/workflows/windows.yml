@@ -1,0 +1,31 @@
+name: Windows
+
+on: [ push, pull_request, workflow_dispatch ]
+
+jobs:
+  
+  # msvc #######################################################################
+    
+  msvc-2019:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout CXON
+      uses: actions/checkout@v1
+      with:
+        repository: oknenavin/cxon
+        ref: develop
+        path: cxon
+    - name: Checkout I2O
+      uses: actions/checkout@v1
+      with:
+        ref: develop
+        path: i2o
+    - name: Configure
+      env:
+        CXXFLAGS: -I ${{github.workspace}}/cxon/src
+      run: cd test ; cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
+    - name: Build
+      run: cd test ; cmake --build build --parallel
+    - name: Check
+      run: cd test/build ; ctest -j -V -C Release
