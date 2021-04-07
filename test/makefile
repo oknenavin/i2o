@@ -1,4 +1,4 @@
-SHELL = /bin/sh
+SHELL = /bin/bash
 
 outdir = .out
 srcdir = ../src
@@ -13,7 +13,7 @@ cbor2json-src = \
     $(srcdir)/cbor2json.cxx
 
 check: all $(in)
-	@./round-trip.sh
+	@$(SHELL) round-trip.sh
 
 all: $(outdir)/json2cbor $(outdir)/json2json $(outdir)/cbor2json
 

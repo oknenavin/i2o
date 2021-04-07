@@ -57,6 +57,6 @@ if (CMAKE_BASH AND CMAKE_DIFF)
     add_test (
         NAME i2o/round-trip
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-        COMMAND ./round-trip.sh
+        COMMAND ${CMAKE_BASH} ./round-trip.sh
     )
 endif ()
