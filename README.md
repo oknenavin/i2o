@@ -41,9 +41,9 @@
 
 ###### Example
 ```bash
-$ json2cbor < in.json > out.cbor                    # conversion from JSON to CBOR
-$ cbor2json < in.cbor > out.json                    # conversion from CBOR to JSON
-$ cat < in.cbor | cbor2json | json2json > out.json  # conversion from CBOR to JSON, pretty-printed
+$ json2cbor < in.json > out.cbor                  # JSON to CBOR
+$ cbor2json < in.cbor > out.json                  # CBOR to JSON
+$ cat in.cbor | cbor2json | json2json > out.json  # CBOR to pretty JSON
 ```
 
 --------------------------------------------------------------------------------
@@ -63,7 +63,10 @@ The implementation strictly complies with [`RFC7049`][RFC7049].
 
 #### Compilation
 
-`CXON` requires [`C++11`][cpp-comp-support] compliant compiler.  
+`I2O` requires [`C++11`][cpp-comp-support] compliant compiler.
+[`C++17`][cpp-comp-support] compliant compiler with [`<charconv>`][std-charconv]
+([`P0067R5`](http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0067r5.html)) support
+is recommended for best performance.  
 The only dependency, besides the standard library is the [`CXON`](https://github.com/oknenavin/cxon) library.
 
 
@@ -71,7 +74,7 @@ The only dependency, besides the standard library is the [`CXON`](https://github
 
 #### Installation
 
-`I2O` can be build and installed with the provided makefile on `POSIX` systems:
+`I2O` can be built and installed using the included makefile on `POSIX` systems:
 
 ``` bash
 $ git clone https://github.com/oknenavin/cxon.git
@@ -79,8 +82,21 @@ $ sudo make -C cxon install
 $ git clone https://github.com/oknenavin/i2o.git
 $ sudo make -C i2o install
 ```
+The default installation directory is `/usr/local/bin` and can be altered with
+[`DESTDIR`](http://www.gnu.org/prep/standards/html_node/DESTDIR.html#DESTDIR) and
+[`prefix`](http://www.gnu.org/prep/standards/html_node/Directory-Variables.html)
+variables, for example:
 
-or because `CXON` is a header-only library, you may skip its installation:
+``` bash
+$ git clone https://github.com/oknenavin/cxon.git
+$ sudo make -C cxon DESTDIR=~ prefix=/. install
+$ git clone https://github.com/oknenavin/i2o.git
+$ sudo make -C i2o DESTDIR=~ prefix=/. install
+```
+
+will install `CXON` and `I2O` in `~/include` and `~/bin` respectively.
+
+Because `CXON` is a header-only library, you may skip its installation:
 
 ``` bash
 $ git clone https://github.com/oknenavin/cxon.git
@@ -128,6 +144,7 @@ Distributed under the MIT license. See [`LICENSE`](LICENSE) for more information
 [img-lgtm-qual]: https://img.shields.io/lgtm/grade/cpp/g/oknenavin/cxon.svg?logo=lgtm&logoWidth=18
 [img-lgtm-alrt]: https://img.shields.io/lgtm/alerts/g/oknenavin/cxon.svg?logo=lgtm&logoWidth=18
 [cpp-comp-support]: https://en.cppreference.com/mwiki/index.php?title=cpp/compiler_support&oldid=108771
+[std-charconv]: https://en.cppreference.com/mwiki/index.php?title=cpp/header/charconv&oldid=105120
 [RFC7159]: https://www.ietf.org/rfc/rfc7159.txt
 [ECMA-404]: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
 [RFC7049]: https://tools.ietf.org/rfc/rfc7049.txt
