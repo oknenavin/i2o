@@ -80,7 +80,7 @@ jobs:
       with:
         path: i2o
     - name: Compiler setup
-      run: sudo apt-get update; sudo apt-get install clang-3.5
+      run: sudo apt update; sudo apt install clang-4.0
     - name: Check
       env:
         CXX: clang++-4.0
