@@ -1,119 +1,90 @@
 name: Linux
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 3 * * 5'
 
 jobs:
 
   # gcc ########################################################################
 
-  gcc-5:
-    runs-on: ubuntu-18.04
+  gcc:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: ['5', '12']
+      fail-fast: false
     steps:
+    - name: APT Update
+      run: |
+        echo 'deb [trusted=yes] http://dk.archive.ubuntu.com/ubuntu/ bionic main'     | sudo tee -a /etc/apt/sources.list
+        echo 'deb [trusted=yes] http://dk.archive.ubuntu.com/ubuntu/ bionic universe' | sudo tee -a /etc/apt/sources.list
+        sudo apt update
     - name: Checkout CXON
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         repository: oknenavin/cxon
         ref: master
         path: cxon
     - name: Install CXON
-      run: sudo make -C ../cxon install
+      run: sudo make -C cxon install
     - name: Checkout I2O
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         path: i2o
     - name: Compiler setup
-      run: sudo apt-get update; sudo apt-get install gcc-5 g++-5
+      run: sudo apt install gcc-${{ matrix.compiler }} g++-${{ matrix.compiler }}
     - name: Check
       env:
-        CXX: g++-5
+        CXX: g++-${{ matrix.compiler }}
         CXXFLAGS: -std=c++11
       run: |
+        cd i2o
         make -j check
         sudo make install
         stat -t /usr/local/bin/json2cbor
         stat -t /usr/local/bin/json2json
         stat -t /usr/local/bin/cbor2json
 
-  gcc-11:
-    runs-on: ubuntu-20.04
-    steps:
-    - name: Checkout CXON
-      uses: actions/checkout@v1
-      with:
-        repository: oknenavin/cxon
-        ref: master
-        path: cxon
-    - name: Install CXON
-      run: sudo make -C ../cxon install
-    - name: Checkout I2O
-      uses: actions/checkout@v1
-      with:
-        path: i2o
-    - name: Compiler setup
-      run: sudo apt-get update; sudo apt update; sudo apt install gcc-11 g++-11
-    - name: Check
-      env:
-        CXX: g++-11
-        CXXFLAGS: -std=c++20
-      run: |
-        make -j check
-        sudo make install
-        stat -t /usr/local/bin/json2cbor
-        stat -t /usr/local/bin/json2json
-        stat -t /usr/local/bin/cbor2json
-  
   # clang ######################################################################
 
-  clang-4:
-    runs-on: ubuntu-18.04
+  clang:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: ['4.0', '15']
+      fail-fast: false
     steps:
+    - name: APT Update
+      run: |
+        echo 'deb [trusted=yes] http://dk.archive.ubuntu.com/ubuntu/ bionic main'     | sudo tee -a /etc/apt/sources.list
+        echo 'deb [trusted=yes] http://dk.archive.ubuntu.com/ubuntu/ bionic universe' | sudo tee -a /etc/apt/sources.list
+        echo 'deb [trusted=yes] http://dk.archive.ubuntu.com/ubuntu/ focal main'      | sudo tee -a /etc/apt/sources.list
+        echo 'deb [trusted=yes] http://dk.archive.ubuntu.com/ubuntu/ focal universe'  | sudo tee -a /etc/apt/sources.list
+        sudo apt update
     - name: Checkout CXON
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         repository: oknenavin/cxon
         ref: master
         path: cxon
     - name: Install CXON
-      run: sudo make -C ../cxon install
+      run: sudo make -C cxon install
     - name: Checkout I2O
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         path: i2o
     - name: Compiler setup
-      run: sudo apt update; sudo apt install clang-4.0
+      run: sudo apt install clang-${{ matrix.compiler }}
     - name: Check
       env:
-        CXX: clang++-4.0
+        CXX: clang++-${{ matrix.compiler }}
         CXXFLAGS: -std=c++11
       run: |
-        make -j check
-        sudo make install
-        stat -t /usr/local/bin/json2cbor
-        stat -t /usr/local/bin/json2json
-        stat -t /usr/local/bin/cbor2json
-
-  clang-12:
-    runs-on: ubuntu-20.04
-    steps:
-    - name: Checkout CXON
-      uses: actions/checkout@v1
-      with:
-        repository: oknenavin/cxon
-        ref: master
-        path: cxon
-    - name: Install CXON
-      run: sudo make -C ../cxon install
-    - name: Checkout I2O
-      uses: actions/checkout@v1
-      with:
-        path: i2o
-    - name: Compiler setup
-      run: sudo apt-get update; sudo apt-get install clang-11
-    - name: Check
-      env:
-        CXX: clang++-12
-        CXXFLAGS: -std=c++20
-      run: |
+        cd i2o
         make -j check
         sudo make install
         stat -t /usr/local/bin/json2cbor

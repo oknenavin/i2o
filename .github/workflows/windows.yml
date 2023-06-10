@@ -1,6 +1,11 @@
 name: Windows
 
-on: [ push, pull_request, workflow_dispatch ]
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 3 * * 5'
 
 jobs:
   
@@ -11,20 +16,20 @@ jobs:
 
     steps:
     - name: Checkout CXON
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         repository: oknenavin/cxon
         ref: master
         path: cxon
     - name: Checkout I2O
-      uses: actions/checkout@v1
+      uses: actions/checkout@v3
       with:
         path: i2o
     - name: Configure
       env:
         CXXFLAGS: -I ../../../cxon/src
-      run: cd test ; cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
+      run: cd i2o/test ; cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
     - name: Build
-      run: cd test ; cmake --build build --parallel
+      run: cd i2o/test ; cmake --build build --parallel
     - name: Check
-      run: cd test/build ; ctest -j -V -C Release
+      run: cd i2o/test/build ; ctest -j -V -C Release

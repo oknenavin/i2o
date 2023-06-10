@@ -23,7 +23,7 @@
 --------------------------------------------------------------------------------
 
 `I2O` is a collection of filters for conversion between the file formats
-  implemented by the [`CXON`](https://github.com/oknenavin/cxon) library,
+  implemented by [`CXON`](https://github.com/oknenavin/cxon) library,
   which currently consist of [`JSON`](http://json.org) and [`CBOR`](https://cbor.io)
 
 
@@ -54,11 +54,11 @@ $ cat in.cbor | cbor2json | json2json > out.json  # CBOR to pretty JSON
 
 ##### [`JSON`](http://json.org)
 
-The implementation strictly complies with [`RFC7159`][RFC7159] / [`ECMA-404`][ECMA-404].
+The implementation strictly complies with [`RFC8259`][RFC8259] / [`ECMA-404`][ECMA-404].  
 
 ##### [`CBOR`](https://cbor.io)
 
-The implementation strictly complies with [`RFC7049`][RFC7049].
+The implementation complies with [`RFC7049`][RFC7049].
 
 
 --------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ Distributed under the MIT license. See [`LICENSE`](LICENSE) for more information
 <!-- links -->
 [img-bin]: https://img.shields.io/badge/bin-I2O-608060.svg?style=plastic
 [img-ver]: https://img.shields.io/github/release/oknenavin/i2o.svg?style=plastic&color=608060
-[img-lng]: https://img.shields.io/badge/language-C++11/20-608060.svg?style=plastic&logo=C%2B%2B
+[img-lng]: https://img.shields.io/badge/language-C++11/14/17/20-608060.svg?style=plastic&logo=C%2B%2B
 [img-fmt-json]: https://img.shields.io/badge/language-JSON-608060.svg?style=plastic&logo=JSON
 [img-fmt-cbor]: https://img.shields.io/badge/language-CBOR-608060.svg?style=plastic
 [img-lic]: https://img.shields.io/badge/license-MIT-608060.svg?style=plastic
@@ -147,7 +147,8 @@ Distributed under the MIT license. See [`LICENSE`](LICENSE) for more information
 [img-lgtm-alrt]: https://img.shields.io/lgtm/alerts/g/oknenavin/cxon.svg?logo=lgtm&logoWidth=18
 [cpp-comp-support]: https://en.cppreference.com/mwiki/index.php?title=cpp/compiler_support&oldid=108771
 [std-charconv]: https://en.cppreference.com/mwiki/index.php?title=cpp/header/charconv&oldid=105120
-[RFC7159]: https://www.ietf.org/rfc/rfc7159.txt
-[ECMA-404]: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
 [RFC7049]: https://tools.ietf.org/rfc/rfc7049.txt
+[ECMA-404]: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf
+[RFC8259]: https://www.ietf.org/rfc/rfc8259.txt
+<!--[RFC7049]: https://tools.ietf.org/rfc/rfc7049.txt-->
 [github]: https://github.com/oknenavin/cxon
