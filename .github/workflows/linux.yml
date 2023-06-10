@@ -42,6 +42,7 @@ jobs:
         CXX: g++-${{ matrix.compiler }}
         CXXFLAGS: -std=c++11
       run: |
+        cd i2o
         make -j check
         sudo make install
         stat -t /usr/local/bin/json2cbor
@@ -83,6 +84,7 @@ jobs:
         CXX: clang++-${{ matrix.compiler }}
         CXXFLAGS: -std=c++11
       run: |
+        cd i2o
         make -j check
         sudo make install
         stat -t /usr/local/bin/json2cbor
