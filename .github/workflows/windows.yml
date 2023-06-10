@@ -28,8 +28,8 @@ jobs:
     - name: Configure
       env:
         CXXFLAGS: -I ../../../cxon/src
-      run: cd test ; cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
+      run: cd i2o/test ; cmake -S . -B build -D CMAKE_BUILD_TYPE=Release
     - name: Build
-      run: cd test ; cmake --build build --parallel
+      run: cd i2o/test ; cmake --build build --parallel
     - name: Check
-      run: cd test/build ; ctest -j -V -C Release
+      run: cd i2o/test/build ; ctest -j -V -C Release
