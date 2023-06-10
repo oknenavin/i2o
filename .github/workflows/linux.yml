@@ -30,7 +30,7 @@ jobs:
         ref: master
         path: cxon
     - name: Install CXON
-      run: sudo make -C ../cxon install
+      run: sudo make -C cxon install
     - name: Checkout I2O
       uses: actions/checkout@v3
       with:
@@ -71,7 +71,7 @@ jobs:
         ref: master
         path: cxon
     - name: Install CXON
-      run: sudo make -C ../cxon install
+      run: sudo make -C cxon install
     - name: Checkout I2O
       uses: actions/checkout@v3
       with:
